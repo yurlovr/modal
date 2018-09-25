@@ -6,7 +6,7 @@ function getSendServer(event) {
    let body = new FormData(form.querySelector('.modal-form'));
 
    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'file.php', true);
+    xhr.open('POST', 'https://yurlovr.github.io/modal/file.php', true);
     xhr.send(body);
     xhr.onreadystatechange = function () {
         if (this.readyState !== 4) return;

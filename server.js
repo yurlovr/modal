@@ -1,7 +1,12 @@
 var http = require('http');
 var static = require('node-static');
-var file = new static.Server('.');
+var file = new static.Server('.', {
+    cache: 0,
 
+    headers: {
+        'Access-Control-Allow-Origin': 'https://yurlovr.github.io',
+    }
+});
 http.createServer(function(req, res) {
     file.serve(req, res);
 }).listen(3000);
