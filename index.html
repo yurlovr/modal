@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="stylesheet" href="style.min.css">
+    <title>Modal</title>
+</head>
+<body>
+
+    <header></header>
+
+    <main>
+
+        <button class="button-start btn-null btn" type="submit"> Открыть форму </button>
+
+        <section class="modal-form-feedback">
+            <h2>Напишите нам.</h2>
+
+            <form class="modal-form" name="user" enctype="multipart/form-data">
+
+                <p>
+                    <label for="user-name">Как Вас зовут?</label>
+                    <input class="modal-name-user modal-user-input" id="user-name" type="text" name="user-name" placeholder="Ваше имя?">
+                </p>
+
+                <p>
+                    <label for="user-name">Телефон в формате 8 xxx xx xx xxx: </label>
+                    <input class="modal-tel-user modal-user-input" id="user-tel" type="tel" name="user-tel" placeholder="8 983 46 45 455">
+                </p>
+
+                <p>
+                    <label for="user-email">Ваша почта для ответа</label>
+                    <input class="modal-mail-user modal-user-input" id="user-email" type="email" name="user-email" placeholder="Ваша почта для ответа?">
+                </p>
+
+                <button class="button-form-modal btn btn-null" type="submit">Отправить</button>
+
+            </form>
+           <button class="modal-form-feedback-close" type="button">Закрыть</button>
+        </section>
+        <div class="modal-overlay"></div>
+
+        <section class="modal-form-feedback modal-user-answer">
+            <h2>Полученные данные</h2>
+            <ul class="user-answer">
+                <li>
+                    <p class="header-answer">Ваше Имя: </p>
+                </li>
+                <li>
+                    <p class="header-answer">Ваш номер телефона: </p>
+                </li>
+                <li>
+                    <p class="header-answer">Ваша электронная почта:</p>
+                </li>
+            </ul>
+
+            <button class="button-form-modal btn btn-null btn-answer no-ok" type="button"> Сбросить форму </button>
+            <button class="button-form-modal btn btn-null btn-answer ok" type="button"> OK </button>
+        </section>
+
+        <section class="modal-form-feedback modal-user-finish">
+            <h2>Спасибо.<br>Мы обязательно с Вами свяжемся!</h2>
+        </section>
+
+        <section class="alert">
+            <h2 class="visually-hidden">Ошибка ввода</h2>
+            <p>
+                Введите корректные данные!
+            </p>
+        </section>
+        <div class="overlay-alert"></div>
+
+    </main>
+
+    <footer></footer>
+
+   <script src="script.min.js"></script>
+</body>
+</html>
