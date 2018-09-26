@@ -87,7 +87,7 @@ function getSuccessForm() {
         userTel.classList.remove('error-anime');
     };
     userTel.onchange = function () {
-        let reg = /^((\+?7|8)[ \-] ?)?((\(\d{3}\))|(\d{3}))?([ \-])?((\d{3}[\- ]?\d{2}[\- ]?\d{2})|(\d{2}[\- ]?\d{2}[\- ]?\d{3}))$/; // проверить
+        let reg = /^((\+?7|8)[ \-] ?)?((\(\d{3}\))|(\d{3}))?([ \-])?((\d{3}[\- ]?\d{2}[\- ]?\d{2})|(\d{2}[\- ]?\d{2}[\- ]?\d{3}))$/;
 
       flagTel = getTestInput(reg, userTel, flagTel);
 
