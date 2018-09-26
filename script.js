@@ -1,4 +1,16 @@
 "use strict"
+
+const form = document.querySelector('.modal-form-feedback');
+const overlay = document.querySelector(".modal-overlay");
+const userName = form.querySelector('.modal-name-user');
+const userTel = form.querySelector('.modal-tel-user');
+const userMail = form.querySelector('.modal-mail-user');
+const formUserData = document.querySelector('.modal-user-answer');
+const modalFinish = document.querySelector('.modal-user-finish');
+let openForm = document.querySelector('.button-start');
+let closeForm = document.querySelector('.modal-form-feedback-close');
+
+
 function getSendServer(event) {
 
     event.preventDefault();
@@ -24,6 +36,17 @@ function getSendServer(event) {
         }
     }
 
+function getTestInput (reg,elem,flag) {
+    if (reg.test(elem.value) === false) {
+        elem.classList.add('error-anime');
+        getShowAlert();
+        return false;
+    } else {
+        elem.classList.remove('error-anime');
+        return true;
+    }
+}
+
 function getSuccessForm() {
     let flagName = false;
     let flagTel = false;
@@ -35,22 +58,14 @@ function getSuccessForm() {
     userName.onchange = function () {
         let reg = /^[а-яёa-z]+$/iu;
 
-        if (reg.test(userName.value) === false) {
-            userName.classList.add('error-anime');
-            getShowAlert();
-            return;
-        } else {
-            userName.classList.remove('error-anime');
-
-            flagName = true;
+        flagName = getTestInput(reg, userName, flagName);
 
             if (flagName && flagTel && flagMail) {
                 getShowButton();
             }
-
             return;
-        }
-    };
+        };
+
     userMail.onfocus = function () {
         userMail.classList.remove('error-anime');
     };
@@ -59,21 +74,14 @@ function getSuccessForm() {
 
         let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-        if (reg.test(userMail.value) === false) {
-            userMail.classList.add('error-anime');
-            getShowAlert();
-            return;
-        } else {
-            userMail.classList.remove('error-anime');
-            flagMail = true;
+
+        flagMail = getTestInput(reg, userMail, flagMail);
 
             if (flagName && flagTel && flagMail) {
                 getShowButton();
             }
-
             return;
-        }
-    };
+        };
 
     userTel.onfocus = function () {
         userTel.classList.remove('error-anime');
@@ -81,21 +89,13 @@ function getSuccessForm() {
     userTel.onchange = function () {
         let reg = /^((\+?7|8)[ \-] ?)?((\(\d{3}\))|(\d{3}))?([ \-])?((\d{3}[\- ]?\d{2}[\- ]?\d{2})|(\d{2}[\- ]?\d{2}[\- ]?\d{3}))$/; // проверить
 
-        if (reg.test(userTel.value) === false) {
-            userTel.classList.add('error-anime');
-            getShowAlert();
-            return;
-        } else {
-            userTel.classList.remove('error-anime');
-            flagTel = true;
+      flagTel = getTestInput(reg, userTel, flagTel);
 
             if (flagName && flagTel && flagMail) {
                 getShowButton();
             }
-
             return;
-        }
-    };
+        };
 }
 
 function getShowButton () {
@@ -127,15 +127,6 @@ function closeFeedBackEsc(event) { // close form esc
     }
 }
 
-const form = document.querySelector('.modal-form-feedback');
-const overlay = document.querySelector(".modal-overlay");
-const userName = form.querySelector('.modal-name-user');
-const userTel = form.querySelector('.modal-tel-user');
-const userMail = form.querySelector('.modal-mail-user');
-const formUserData = document.querySelector('.modal-user-answer');
-const modalFinish = document.querySelector('.modal-user-finish');
-let openForm = document.querySelector('.button-start');
-
 openForm.addEventListener('click',() => {
     clearForm();
     setTimeout ( () => {
@@ -147,8 +138,6 @@ openForm.addEventListener('click',() => {
 
 });
 
-let closeForm = document.querySelector('.modal-form-feedback-close');
-
 closeForm.addEventListener('click',() => { // close form click on X
     form.style.display = 'none';
     overlay.style.display = "none";
@@ -156,9 +145,10 @@ closeForm.addEventListener('click',() => { // close form click on X
 });
 
 form.addEventListener('submit', getSendServer); // send form
-window.addEventListener("keydown", closeFeedBackEsc); // close form on keydown Ecs
 
+window.addEventListener("keydown", closeFeedBackEsc); // close form on keydown Ecs
 let buttonOk = document.querySelector('.ok');
+
 buttonOk.addEventListener('click', function () {
     formUserData.style.display = 'none';
     modalFinish.style.display = 'block';
@@ -168,15 +158,15 @@ buttonOk.addEventListener('click', function () {
         openForm.style.display = 'block';
     },5000);
 });
-
 let buttonNoOk = document.querySelector('.no-ok');
+
 buttonNoOk.addEventListener('click', function () {
     clearForm();
     formUserData.style.display = 'none';
     openForm.style.display = 'block';
 });
-
 function clearForm() {
+
     let insertUserData = formUserData.querySelectorAll('.header-answer');
     let buttonSend = form.querySelector('.button-form-modal');
     userName.value = '';
@@ -186,8 +176,8 @@ function clearForm() {
     if (userName.classList.contains('error-anime')) {userName.classList.remove('error-anime')}
     if (userTel.classList.contains('error-anime')) {userTel.classList.remove('error-anime')}
     if (userMail.classList.contains('error-anime')){userMail.classList.remove('error-anime')}
-
     for (let i = 0; i < insertUserData.length; i++) {
+
         if(insertUserData[i].nextElementSibling) {
             insertUserData[i].nextElementSibling.remove();
         }
@@ -195,6 +185,7 @@ function clearForm() {
 }
 
 function getShowAlert()  {
+
     let alert = document.querySelector('.alert');
     let overlayAlert = document.querySelector('.overlay-alert');
     alert.style.display = 'block';
@@ -202,8 +193,6 @@ function getShowAlert()  {
     setTimeout(() => {
         alert.style.display = 'none';
         overlayAlert.style.display = 'none';
-    },1000)
+    },1000);
 }
-
-
 
